@@ -56,34 +56,30 @@ export default function InquiryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "grid", gap: "0.75rem", maxWidth: "400px", marginTop: "2rem" }}>
+    <form onSubmit={handleSubmit} className="form" style={{ marginTop: "2rem", maxWidth: "420px" }}>
       <h2>Request a quote / invoice</h2>
-      <p style={{ fontSize: "0.85rem", color: "#666" }}>
+      <p style={{ fontSize: "0.85rem", color: "var(--color-muted)" }}>
         Fields below are placeholders until the client confirms what this form should collect.
       </p>
 
-      <label>
+      <label className="form-field">
         Name
-        <br />
         <input name="name" value={form.name} onChange={handleChange} required />
       </label>
-      <label>
+      <label className="form-field">
         Email
-        <br />
         <input type="email" name="email" value={form.email} onChange={handleChange} required />
       </label>
-      <label>
+      <label className="form-field">
         Phone
-        <br />
         <input name="phone" value={form.phone} onChange={handleChange} />
       </label>
-      <label>
+      <label className="form-field">
         Message
-        <br />
         <textarea name="message" value={form.message} onChange={handleChange} rows={3} />
       </label>
 
-      <button type="submit" disabled={status === "sending"}>
+      <button type="submit" className="btn-primary" disabled={status === "sending"}>
         {status === "sending" ? "Sending..." : "Send request"}
       </button>
       {status === "error" && <span style={{ color: "crimson" }}>Something went wrong — try again.</span>}

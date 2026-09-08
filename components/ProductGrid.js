@@ -1,4 +1,5 @@
 import ProductCard from "./ProductCard";
+import styles from "./ProductGrid.module.css";
 
 export default function ProductGrid({ products }) {
   if (products.length === 0) {
@@ -6,13 +7,7 @@ export default function ProductGrid({ products }) {
   }
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-        gap: "1.5rem",
-      }}
-    >
+    <div className={styles.grid}>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

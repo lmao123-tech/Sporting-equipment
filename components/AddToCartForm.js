@@ -17,34 +17,32 @@ export default function AddToCartForm({ product, selectedColor }) {
   }
 
   return (
-      <form onSubmit={handleSubmit} style={{ display: "grid", gap: "0.75rem", maxWidth: "300px" }}>
-        <label>
-          Size
-          <br />
-          <select value={size} onChange={(e) => setSize(e.target.value)}>
-            {product.sizes.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-            ))}
-          </select>
-        </label>
+    <form onSubmit={handleSubmit} className="form" style={{ marginTop: "1.5rem" }}>
+      <label className="form-field">
+        Size
+        <select value={size} onChange={(e) => setSize(e.target.value)}>
+          {product.sizes.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+      </label>
 
-        <label>
-          Quantity
-          <br />
-          <input
-              type="number"
-              min="1"
-              value={quantity}
-              onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
-          />
-        </label>
+      <label className="form-field">
+        Quantity
+        <input
+          type="number"
+          min="1"
+          value={quantity}
+          onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
+        />
+      </label>
 
-        <button type="submit" className="btn-primary">
-          Add to cart
-        </button>
-        {justAdded && <span>Added to cart.</span>}
-      </form>
+      <button type="submit" className="btn-primary">
+        Add to cart
+      </button>
+      {justAdded && <span style={{ color: "var(--color-accent)", fontSize: "0.9rem" }}>Added to cart.</span>}
+    </form>
   );
 }

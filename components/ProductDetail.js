@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ProductGallery from "./ProductGallery";
 import AddToCartForm from "./AddToCartForm";
+import styles from "./ProductDetail.module.css";
 
 // Client boundary for the product detail page: holds which color is
 // currently selected so the gallery image and the add-to-cart form
@@ -11,25 +12,17 @@ export default function ProductDetail({ product }) {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 
   return (
-    <div
-      className="container"
-      style={{
-        padding: "2rem 1rem",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "2rem",
-      }}
-    >
+    <div className={`container ${styles.wrap}`}>
       <ProductGallery
         colors={product.colors}
         selectedColor={selectedColor}
         onSelectColor={setSelectedColor}
         productName={product.name}
       />
-      <div>
+      <div className={styles.info}>
         <h1>{product.name}</h1>
-        <p>${product.price.toFixed(2)}</p>
-        <p>{product.description}</p>
+        <p className={styles.price}>${product.price.toFixed(2)}</p>
+        <p className={styles.description}>{product.description}</p>
         <AddToCartForm product={product} selectedColor={selectedColor} />
       </div>
     </div>

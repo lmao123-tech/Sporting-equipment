@@ -1,10 +1,17 @@
 /*
- * Only two design decisions are confirmed so far (client-approved,
- * 2026-09-08): a white background and an orange accent color, inspired
- * by the zajo.com reference. Everything else (spacing, type scale,
- * layout polish) is still deliberately minimal — the real design pass
- * comes later. Keep new color usage going through these variables so
- * that pass has one place to change things.
+ * Design-decision status (updated 2026-09-08): white background + orange
+ * accent are client-approved. Beyond that, this file now also carries the
+ * first real responsive/visual design pass (bigger product panels, styled
+ * header/cart, fluid type) — still expected to evolve once the client
+ * meeting settles the open questions in Questions.md, but no longer just
+ * a bare reset. Component-specific layout lives in colocated
+ * *.module.css files; this file holds shared tokens and the handful of
+ * classes used across more than one component (buttons, form fields).
+ *
+ * Responsive approach: mobile-first. Base styles here and in each
+ * .module.css target small screens; `min-width` media queries layer on
+ * larger-screen treatment. `clamp()` is used for fluid type sizes where
+ * that avoids needing a breakpoint at all.
  */
 :root {
   --color-bg: #ffffff;
@@ -14,6 +21,11 @@
   --color-accent: #f97316;
   --color-accent-hover: #ea580c;
   --color-accent-contrast: #ffffff;
+
+  /* Shared breakpoints, for reference in comments across .module.css
+     files (CSS can't read these into @media directly, but keeping the
+     values in one place makes it easy to stay consistent). tablet: 640px,
+     desktop: 1024px. */
 }
 
 * {
@@ -31,6 +43,11 @@ a {
   color: inherit;
 }
 
+img {
+  max-width: 100%;
+  display: block;
+}
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -38,15 +55,19 @@ a {
 }
 
 /* Shared primary-action button style — accent color, used for the site's
-   main calls to action (add to cart, send inquiry, etc). */
+   main calls to action (add to cart, send inquiry, hero CTA). Works on
+   both <button> and <a>. */
 .btn-primary {
+  display: inline-block;
   background: var(--color-accent);
   color: var(--color-accent-contrast);
   border: none;
-  padding: 0.6rem 1.25rem;
+  padding: 0.7rem 1.4rem;
   font-size: 1rem;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
 }
 
 .btn-primary:hover {
@@ -59,4 +80,34 @@ a {
   cursor: not-allowed;
 }
 
-/* Deliberately minimal beyond this — design pass comes later. */
+/* Shared form styles — used by AddToCartForm and InquiryForm so both
+   forms look consistent without duplicating the same rules in two
+   component-scoped CSS modules. */
+.form {
+  display: grid;
+  gap: 1rem;
+  max-width: 340px;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.form-field select,
+.form-field input,
+.form-field textarea {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-field select:focus,
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
