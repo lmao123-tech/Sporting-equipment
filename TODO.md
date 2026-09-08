@@ -41,16 +41,26 @@ priority bucket is always asked for — never assigned on our own.
       building the DB schema and gallery UI around it.
       Flagged 2026-09-08.
 
+- [x] Product card image carousel transition: was swapping images
+      instantly on each cycle; now slides smoothly between them (the
+      images sit in a horizontal track, translated with a CSS
+      transition, rather than the `src` just being swapped). Holds
+      regardless of what the client says about auto-advance vs.
+      click-through (see the Should item below) — it was about the
+      transition quality, not who triggers it.
+      Flagged 2026-09-08, done 2026-09-08.
+
 ## Should
 
-- [ ] Product card / gallery image carousel behavior: currently
-      auto-advancing (cycles through a product's images automatically),
-      built on 2026-09-08 as part of the responsive design pass. **Ask
-      the client** whether they'd rather users click/tap through images
-      instead of them auto-scrolling — see `Questions.md`. Whichever way
-      it's decided, it's a small change to `ProductCard.js` since the
-      cycling logic is already isolated there.
-      Flagged 2026-09-08.
+- [x] Product card image carousel behavior: was auto-advancing; user
+      decided 2026-09-08 to switch to click/tap-through arrows instead —
+      auto-cycling looked odd with a full grid of cards all changing
+      image at once, and click-through is more predictable. Implemented
+      in `ProductCard.js` (prev/next arrow buttons over the image, no
+      more timer). This was a developer decision, not one run by the
+      client — removed the matching question from `Questions.md`
+      accordingly; say if you'd rather it still be confirmed with them.
+      Flagged 2026-09-08, decided & done 2026-09-08.
 
 - [ ] Accordion layout for product description / specifications / size
       chart (collapsed sections instead of always-expanded), inspired by

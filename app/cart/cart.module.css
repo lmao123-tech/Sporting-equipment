@@ -13,10 +13,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  padding: 0.9rem;
+  gap: 1.25rem;
+  padding: 1.15rem;
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: 12px;
+  font-size: 1.05rem;
 }
 
 .product {
@@ -28,8 +29,8 @@
 }
 
 .thumb {
-  width: 56px;
-  height: 56px;
+  width: 68px;
+  height: 68px;
   object-fit: cover;
   border-radius: 8px;
   background: #f2f2f2;
@@ -85,5 +86,5 @@
 .subtotal {
   text-align: right;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
 }
