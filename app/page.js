@@ -1,37 +1,29 @@
-import Link from "next/link";
 import Section from "@/components/Section";
 import ProductGrid from "@/components/ProductGrid";
-import { CATEGORIES, getFeaturedProducts, getProductsByCategory } from "@/lib/data";
+import { CATEGORIES, getAllProducts, getProductsByCategory } from "@/lib/data";
 import styles from "./page.module.css";
 
-// Home page: divided into sections, per the brief. All content is
-// server-rendered directly from the mock data layer (lib/data.js) — no
-// client-side fetch needed here since none of this section is interactive.
-export default function HomePage() {
-  const featured = getFeaturedProducts(4);
+// Home page. Used to show only a "featured" subset with a separate
+// /products catalogue page for everything else + category browsing.
+// Merged per 2026-09-08 decision: this page now shows every product,
+// and category browsing moved into the header's mega-menu (see
+// components/MegaMenu.js + NAV_MENU in lib/data.js) instead of a tile
+// grid here. The optional ?category=<slug> query param (set by clicking
+// a category in the header) still filters this same grid — no separate
+// route needed for that anymore.
+export default function HomePage({ searchParams }) {
+  const activeCategory = CATEGORIES.find((c) => c.slug === searchParams?.category);
+  const products = activeCategory ? getProductsByCategory(activeCategory.slug) : getAllProducts();
 
   return (
     <>
       <div className={styles.hero}>
         <h1>Pavkata</h1>
         <p>Sporting equipment, apparel, and nutrition.</p>
-        <Link href="/products" className="btn-primary">
-          Browse the catalogue
-        </Link>
       </div>
 
-      <Section title="Shop by category">
-        <div className={styles.categories}>
-          {CATEGORIES.map((cat) => (
-            <Link key={cat.slug} href={`/products?category=${cat.slug}`} className={styles.categoryTile}>
-              {cat.name} ({getProductsByCategory(cat.slug).length})
-            </Link>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Featured products">
-        <ProductGrid products={featured} />
+      <Section id="products" title={activeCategory ? activeCategory.name : "All products"}>
+        <ProductGrid products={products} />
       </Section>
     </>
   );

@@ -40,7 +40,7 @@ export default function CartPage() {
 
       {items.length === 0 ? (
         <p>
-          Your cart is empty. <Link href="/products">Browse the catalogue</Link>.
+          Your cart is empty. <Link href="/">Browse products</Link>.
         </p>
       ) : (
         <>

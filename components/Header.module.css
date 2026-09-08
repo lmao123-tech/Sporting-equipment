@@ -29,7 +29,15 @@
   flex-wrap: wrap;
 }
 
+.navItem {
+  display: flex;
+  align-items: center;
+}
+
 .navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   text-decoration: none;
   color: var(--color-text);
   font-size: 1.05rem;
@@ -37,6 +45,12 @@
 
 .navLink:hover {
   color: var(--color-accent);
+}
+
+.chevron {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
 }
 
 .cartBadge {
