@@ -75,6 +75,19 @@ export function CartProvider({ children }) {
     setItems((prev) => prev.filter((item) => item.key !== key));
   }
 
+  // Reinserts a previously-removed line item at (roughly) its original
+  // position — used for the cart's "undo remove" toast. Not the same as
+  // addItem: this restores the exact item object rather than merging
+  // quantities, since it's undoing a removal, not adding something new.
+  function restoreItem(item, index) {
+    setItems((prev) => {
+      const next = [...prev];
+      const clampedIndex = Math.min(Math.max(index, 0), next.length);
+      next.splice(clampedIndex, 0, item);
+      return next;
+    });
+  }
+
   function clearCart() {
     setItems([]);
   }
@@ -83,7 +96,7 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, updateQuantity, removeItem, clearCart, subtotal }}
+      value={{ items, addItem, updateQuantity, removeItem, restoreItem, clearCart, subtotal }}
     >
       {children}
     </CartContext.Provider>

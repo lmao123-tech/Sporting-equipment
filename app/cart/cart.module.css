@@ -17,7 +17,7 @@
   padding: 1.15rem;
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
 .product {
@@ -39,11 +39,12 @@
 
 .name {
   font-weight: 600;
+  font-size: 1.15rem;
 }
 
 .variant {
   color: var(--color-muted);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
 }
 
 .controls {
@@ -69,18 +70,30 @@
 }
 
 .removeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   background: none;
-  border: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
   color: var(--color-muted);
   cursor: pointer;
-  text-decoration: underline;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   white-space: nowrap;
-  padding: 0;
+  padding: 0.4rem 0.75rem;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
 .removeBtn:hover {
+  border-color: crimson;
   color: crimson;
+  background: rgba(220, 20, 60, 0.06);
+}
+
+.removeIcon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 .subtotal {
