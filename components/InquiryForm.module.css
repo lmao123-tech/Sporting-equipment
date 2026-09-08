@@ -1,0 +1,53 @@
+/* Wraps the whole vendor inquiry form in a rounded grey card so it reads
+   as its own section, and stretches it to the full width of the cart
+   page's container — matching the width of the cart list above it —
+   instead of the old fixed 420px box that left it looking stranded on
+   the left half of the page. */
+.wrap {
+  margin-top: 2rem;
+  padding: 1.75rem 1.75rem 2rem;
+  background: var(--color-surface);
+  border-radius: 16px;
+}
+
+.heading {
+  margin-top: 0;
+}
+
+.hint {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* The field grid itself (not the .form global class — that's shared with
+   AddToCartForm on the product page and is intentionally narrow there, so
+   this form gets its own wider layout instead of fighting that rule). */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.submitRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

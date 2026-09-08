@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import styles from "./InquiryForm.module.css";
 
 // The vendor contact/invoice form. Its exact fields are still TBD from the
 // client (per the project brief) — this is a reasonable placeholder set
@@ -52,37 +53,45 @@ export default function InquiryForm() {
   }
 
   if (status === "sent") {
-    return <p>Thanks — your request has been sent to the vendor.</p>;
+    return (
+      <div className={styles.wrap}>
+        <p>Thanks — your request has been sent to the vendor.</p>
+      </div>
+    );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="form" style={{ marginTop: "2rem", maxWidth: "420px" }}>
-      <h2>Request a quote / invoice</h2>
-      <p style={{ fontSize: "0.85rem", color: "var(--color-muted)" }}>
+    <div className={styles.wrap}>
+      <h2 className={styles.heading}>Request a quote / invoice</h2>
+      <p className={styles.hint}>
         Fields below are placeholders until the client confirms what this form should collect.
       </p>
 
-      <label className="form-field">
-        Name
-        <input name="name" value={form.name} onChange={handleChange} required />
-      </label>
-      <label className="form-field">
-        Email
-        <input type="email" name="email" value={form.email} onChange={handleChange} required />
-      </label>
-      <label className="form-field">
-        Phone
-        <input name="phone" value={form.phone} onChange={handleChange} />
-      </label>
-      <label className="form-field">
-        Message
-        <textarea name="message" value={form.message} onChange={handleChange} rows={3} />
-      </label>
+      <form onSubmit={handleSubmit} className={styles.grid}>
+        <label className="form-field">
+          Name
+          <input name="name" value={form.name} onChange={handleChange} required />
+        </label>
+        <label className="form-field">
+          Email
+          <input type="email" name="email" value={form.email} onChange={handleChange} required />
+        </label>
+        <label className="form-field">
+          Phone
+          <input name="phone" value={form.phone} onChange={handleChange} />
+        </label>
+        <label className={`form-field ${styles.full}`}>
+          Message
+          <textarea name="message" value={form.message} onChange={handleChange} rows={3} />
+        </label>
 
-      <button type="submit" className="btn-primary" disabled={status === "sending"}>
-        {status === "sending" ? "Sending..." : "Send request"}
-      </button>
-      {status === "error" && <span style={{ color: "crimson" }}>Something went wrong — try again.</span>}
-    </form>
+        <div className={`${styles.full} ${styles.submitRow}`}>
+          <button type="submit" className="btn-primary" disabled={status === "sending"}>
+            {status === "sending" ? "Sending..." : "Send request"}
+          </button>
+          {status === "error" && <span style={{ color: "crimson" }}>Something went wrong — try again.</span>}
+        </div>
+      </form>
+    </div>
   );
 }

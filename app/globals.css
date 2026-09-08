@@ -21,6 +21,9 @@
   --color-accent: #f97316;
   --color-accent-hover: #ea580c;
   --color-accent-contrast: #ffffff;
+  /* Light grey "card" background — used to set a section like the cart's
+     inquiry form apart from the plain white page background. */
+  --color-surface: #f4f4f4;
 
   /* Shared breakpoints, for reference in comments across .module.css
      files (CSS can't read these into @media directly, but keeping the
