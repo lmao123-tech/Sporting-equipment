@@ -1,0 +1,62 @@
+/*
+ * Only two design decisions are confirmed so far (client-approved,
+ * 2026-09-08): a white background and an orange accent color, inspired
+ * by the zajo.com reference. Everything else (spacing, type scale,
+ * layout polish) is still deliberately minimal — the real design pass
+ * comes later. Keep new color usage going through these variables so
+ * that pass has one place to change things.
+ */
+:root {
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-muted: #666666;
+  --color-border: #dddddd;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-accent-contrast: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Shared primary-action button style — accent color, used for the site's
+   main calls to action (add to cart, send inquiry, etc). */
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border: none;
+  padding: 0.6rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn-primary:disabled {
+  background: var(--color-border);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+/* Deliberately minimal beyond this — design pass comes later. */
