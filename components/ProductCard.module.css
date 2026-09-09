@@ -1,0 +1,144 @@
+.card {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+
+.imageLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Holds all of a product's images side by side; ProductCard.js translates
+   this horizontally to slide between them smoothly instead of an instant
+   swap. Width and each .image's width are set inline (they depend on how
+   many images there are). */
+.track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.image {
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* An SVG chevron, not a text character: glyphs like the old ‹ › don't sit
+   symmetrically in their box at larger sizes (font metrics leave uneven
+   space above/below the visible ink), so no amount of flexbox centering
+   fixes that. Pure geometry centers exactly regardless of button size. */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.arrowIcon {
+  width: 58%;
+  height: 58%;
+}
+
+.arrow:hover {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+.arrowLeft {
+  left: 0.6rem;
+}
+
+.arrowRight {
+  right: 0.6rem;
+}
+
+/* Arrows and dots only show on hover (or keyboard focus, so they're still
+   reachable without a mouse) so the image is fully visible otherwise. On
+   touch devices with no real "hover," this means they're only reachable
+   via focus — worth revisiting once there's real product photography and
+   we know how this feels on mobile. */
+.card:hover .arrow,
+.card:focus-within .arrow {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dots {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.card:hover .dots,
+.card:focus-within .dots {
+  opacity: 1;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.dotActive {
+  background: var(--color-accent);
+}
+
+.info {
+  display: block;
+  padding: 1.1rem 1.25rem 1.4rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.name {
+  display: block;
+  font-size: 1.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.price {
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
