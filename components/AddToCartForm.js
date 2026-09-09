@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import QuantityInput from "@/components/QuantityInput";
 
 export default function AddToCartForm({ product, selectedColor }) {
   const { addItem } = useCart();
@@ -31,12 +32,7 @@ export default function AddToCartForm({ product, selectedColor }) {
 
       <label className="form-field">
         Quantity
-        <input
-          type="number"
-          min="1"
-          value={quantity}
-          onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
-        />
+        <QuantityInput value={quantity} onChange={setQuantity} />
       </label>
 
       <button type="submit" className="btn-primary">

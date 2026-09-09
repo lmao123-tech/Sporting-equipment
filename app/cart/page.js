@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import InquiryForm from "@/components/InquiryForm";
 import UndoToast from "@/components/UndoToast";
+import QuantityInput from "@/components/QuantityInput";
 import styles from "./cart.module.css";
 
 export default function CartPage() {
@@ -58,11 +59,9 @@ export default function CartPage() {
                 </div>
 
                 <div className={styles.controls}>
-                  <input
-                    type="number"
-                    min="1"
+                  <QuantityInput
                     value={item.quantity}
-                    onChange={(e) => updateQuantity(item.key, Math.max(1, Number(e.target.value)))}
+                    onChange={(qty) => updateQuantity(item.key, qty)}
                     className={styles.qtyInput}
                     aria-label={`Quantity for ${item.name}`}
                   />

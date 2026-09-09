@@ -41,6 +41,16 @@ priority bucket is always asked for — never assigned on our own.
       building the DB schema and gallery UI around it.
       Flagged 2026-09-08.
 
+- [ ] Migrate cart persistence off localStorage once auth exists: right
+      now `CartContext.js` persists the whole cart in the browser's
+      localStorage (key `pavkata_cart`) since there's no backend/DB or
+      auth yet — per-browser, not per-account, gone if site data is
+      cleared or the user switches device/browser. That's a deliberate
+      stand-in, not a bug, but once auth exists it should keep
+      localStorage for guests and sync/merge into a server-side cart
+      tied to the logged-in user's account.
+      Flagged 2026-09-09.
+
 - [x] Product card image carousel transition: was swapping images
       instantly on each cycle; now slides smoothly between them (the
       images sit in a horizontal track, translated with a CSS
