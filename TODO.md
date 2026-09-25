@@ -56,6 +56,64 @@ priority bucket is always asked for — never assigned on our own.
       tied to the logged-in user's account.
       Flagged 2026-09-09.
 
+- [ ] Admin panel: add/edit products, set stock quantity per
+      color/variant, write product descriptions (one free-text field per
+      product), and assign related products to each other (manual
+      curation by the client, not automatic — this is what unblocks the
+      related-products carousel in the Could bucket below). Needs an
+      admin account (login/auth) to gate access.
+      Client meeting 2026-09-23. Sequencing: this is the big next phase
+      once picked up — needs auth plus the DB actually wired up, since
+      an admin panel that edits mock data in `lib/data.js` isn't
+      meaningfully useful.
+      Flagged 2026-09-23, bucketed Must 2026-09-25.
+
+- [ ] Sales/promotions system (part of the admin panel): client creates
+      a "sale" — a title, a set of products, and a discount % per
+      product within that sale. Sale price computes from
+      `price * (1 - discountPct/100)`, no separate stored sale price.
+      Open questions, not yet discussed with the client: does a sale
+      have a start/end date or is it manually toggled on/off; can a
+      product be in more than one active sale at once; where the
+      discounted price shows (product card, product detail, cart, or
+      all three).
+      Flagged 2026-09-23, bucketed Must 2026-09-25.
+
+- [ ] Delivery form: customer either types a delivery address or picks
+      an Econt (Bulgarian courier) office from a dropdown of all Econt
+      locations. No Google Maps widget on either path — client declined
+      it outright 2026-09-24 ("hard no... just the Econt thing").
+      Build against Econt's public demo/test system (`iasp-dev` /
+      `1Asp-dev` credentials) for now; swap to the client's real Econt
+      business account before going live. No remaining external
+      blockers.
+      Flagged 2026-09-23, map dropped 2026-09-24, bucketed Must
+      2026-09-25.
+
+- [ ] Multi-language support: Bulgarian, English, and Greek, auto-
+      detected from the visitor's browser language (falls back to
+      English for anything else), plus a manual language switcher in
+      the top-right of the header. Greek translations will be
+      Claude-drafted, then checked by a native speaker.
+      Wide rather than deep — touches nearly every component, since
+      every hardcoded string becomes a translation lookup — best done
+      once other UI churn has calmed down, to avoid re-translating
+      strings that are still changing. Routing approach (Next.js
+      built-in i18n vs. a library like `next-intl`) not yet decided.
+      Flagged 2026-09-23, bucketed Must 2026-09-25.
+
+- [ ] Footer mimicking zajo.com's: normal document flow at the bottom of
+      the page, not sticky (the header stays sticky as it already is —
+      no change needed there). Legal text (returns policy, terms, etc.)
+      is TBD, to be sent by the client. Multilingual — depends on the
+      language-support item above being in place, or at least decided,
+      before real footer copy can be translated.
+      Structure (columns, links, layout) can be built now with
+      placeholder copy and swapped for real text later, same pattern as
+      the mega-menu was built with mock category data ahead of a real
+      DB.
+      Flagged 2026-09-23, bucketed Must 2026-09-25.
+
 - [x] Product card image carousel transition: was swapping images
       instantly on each cycle; now slides smoothly between them (the
       images sit in a horizontal track, translated with a CSS
@@ -116,8 +174,9 @@ priority bucket is always asked for — never assigned on our own.
       suggestion). That means this depends on the admin panel having a
       "assign related products" control before it can be fully wired up
       — the storefront carousel itself is the easy part, the admin-side
-      picker is the real dependency. Worth reconsidering this bucket once
-      the admin panel work is scoped, since it's now coupled to it.
+      picker is the real dependency. The admin panel is now a Must-bucket
+      item above (bucketed 2026-09-25) — worth reconsidering this
+      bucket once that work is actually scoped.
       Flagged 2026-09-08, confirmed & re-scoped 2026-09-23.
 
 ## Won't (for now)
