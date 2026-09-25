@@ -18,20 +18,33 @@ export default function ProductGallery({ colors, selectedColor, onSelectColor, p
         className={styles.image}
       />
       <div className={styles.swatches}>
-        {colors.map((color) => (
-          <button
-            key={color.name}
-            type="button"
-            onClick={() => onSelectColor(color)}
-            title={color.name}
-            aria-label={color.name}
-            aria-pressed={selectedColor.name === color.name}
-            className={
-              selectedColor.name === color.name ? `${styles.swatch} ${styles.swatchActive}` : styles.swatch
-            }
-            style={{ background: color.hex }}
-          />
-        ))}
+        {colors.map((color) => {
+          const outOfStock = color.stock === 0;
+          // Out-of-stock colors stay fully clickable — visitors can still
+          // pick one to look at its photos — they just get a crossed-out
+          // look here, and AddToCartForm is what actually blocks adding
+          // it to the cart.
+          const classNames = [
+            styles.swatch,
+            selectedColor.name === color.name && styles.swatchActive,
+            outOfStock && styles.swatchOutOfStock,
+          ]
+            .filter(Boolean)
+            .join(" ");
+
+          return (
+            <button
+              key={color.name}
+              type="button"
+              onClick={() => onSelectColor(color)}
+              title={outOfStock ? `${color.name} (out of stock)` : color.name}
+              aria-label={outOfStock ? `${color.name} (out of stock)` : color.name}
+              aria-pressed={selectedColor.name === color.name}
+              className={classNames}
+              style={{ background: color.hex }}
+            />
+          );
+        })}
       </div>
     </div>
   );
