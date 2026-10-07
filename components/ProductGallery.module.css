@@ -15,6 +15,7 @@
 }
 
 .swatch {
+  position: relative;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -30,4 +31,24 @@
 
 .swatchActive {
   border-color: var(--color-text);
+}
+
+/* Out of stock: dim the color and draw a diagonal line across it, but it
+   stays a normal, fully-clickable button — see ProductGallery.js for why. */
+.swatchOutOfStock {
+  opacity: 0.45;
+}
+
+.swatchOutOfStock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    to top right,
+    transparent calc(50% - 1.5px),
+    var(--color-text) calc(50% - 1.5px),
+    var(--color-text) calc(50% + 1.5px),
+    transparent calc(50% + 1.5px)
+  );
 }
